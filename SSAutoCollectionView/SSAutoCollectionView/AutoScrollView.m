@@ -208,7 +208,11 @@
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.smallInteger = indexPath.row;
+    if (collectionView == self.bigCollectiionView) {
+        NSLog(@"dianjile    %ld",indexPath.row);
+    }else{
+        self.smallInteger = indexPath.row;
+    }
 }
 //添加定时
 - (void)addUpTimer
