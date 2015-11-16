@@ -209,6 +209,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (collectionView == self.bigCollectiionView) {
+        //点击大的轮播图处理事件
         NSLog(@"dianjile    %ld",indexPath.row);
     }else{
         self.smallInteger = indexPath.row;

@@ -33,9 +33,8 @@
     autoView.backgroundColor = [UIColor greenColor];
     [self.view addSubview:autoView];
     self.autoView = autoView;
-    
-    
-    
+
+    //这个是传值数组,把数组传入到View
     self.autoView.picArray = [NSArray arrayWithObjects:@"1.png",@"2.png",@"3.png",@"4.png", nil];
 }
 - (void)didReceiveMemoryWarning {
