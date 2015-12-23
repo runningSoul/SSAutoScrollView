@@ -25,6 +25,7 @@
 @property (nonatomic)CGFloat BigFloat;
 
 @property (nonatomic,assign)NSInteger smallInteger;
+@property (nonatomic,strong)UICollectionViewFlowLayout *smallFlowLayout;
 @end
 
 @implementation AutoScrollView
@@ -36,6 +37,19 @@
 - (void)viewWillDisAppear
 {
     [self removeTimer];
+}
+
+- (void)setSmallWidth:(CGFloat)smallWidth
+{
+    _smallWidth = smallWidth;
+    self.smallFlowLayout.minimumLineSpacing = smallWidth;
+    NSLog(@"%f",self.smallWidth);
+}
+
+- (void)setMiniSpalicing:(CGFloat)miniSpalicing
+{
+    _miniSpalicing = miniSpalicing;
+    self.smallFlowLayout.minimumLineSpacing = miniSpalicing;
 }
 - (NSArray *)picArray
 {
@@ -55,14 +69,16 @@
     [self addUpTimer];
     
 }
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame width:(CGFloat)width height:(CGFloat)height
 {
     self = [super initWithFrame:frame];
     if (self) {
         [self addBigCollectionViewFrame:frame];
-        [self addSmallView];
+        [self addSmallViewFrame:frame width:width height:height];
         [self addUpTimer];
+        NSLog(@"aaaaaaaaaaaaaa");
         self.smallInteger = 0;
+         NSLog(@"aaaaaaaaaaaaaabbbbbbbbbbbbb");
     }
     return self;
 }
@@ -84,26 +100,26 @@
     collectionView.delegate = self;
     [collectionView registerClass:[BigViewCell class] forCellWithReuseIdentifier:@"cell"];
     collectionView.frame = CGRectMake(0,0, kScreenWidth, 200);
-//    [collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:pageCount inSection:0] atScrollPosition:UICollectionViewScrollPositionLeft animated:NO];
     [self addSubview:collectionView];
     self.bigCollectiionView = collectionView;
     
     
 }
 //小的轮播图
-- (void)addSmallView
+- (void)addSmallViewFrame:(CGRect)frame width:(CGFloat)width height:(CGFloat)height
 {
     UICollectionViewFlowLayout *viewFlowLayout = [[UICollectionViewFlowLayout alloc]init];
-    viewFlowLayout.itemSize = CGSizeMake(40, 50);
+    viewFlowLayout.itemSize = CGSizeMake(width, height);
     viewFlowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     viewFlowLayout.minimumInteritemSpacing = 0;
-    viewFlowLayout.minimumLineSpacing = 4;
-    UICollectionView *CollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,150,500,50) collectionViewLayout:viewFlowLayout];
+    viewFlowLayout.minimumLineSpacing = 0;
+    UICollectionView *CollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,150,500,height) collectionViewLayout:viewFlowLayout];
     CollectionView.dataSource = self;
-    CollectionView.backgroundColor = [UIColor whiteColor];
+    CollectionView.backgroundColor = [UIColor clearColor];
     CollectionView.delegate = self;
     [CollectionView registerClass:[smallViewCell class] forCellWithReuseIdentifier:@"bitCell"];
     [self addSubview:CollectionView];
+    self.smallFlowLayout = viewFlowLayout;
     self.smallCollectiionView = CollectionView;
     
     
@@ -212,7 +228,9 @@
         //点击大的轮播图处理事件
         NSLog(@"dianjile    %ld",indexPath.row);
     }else{
+        [self.bigCollectiionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:pageCount+indexPath.row inSection:0] atScrollPosition:UICollectionViewScrollPositionLeft animated:NO];
         self.smallInteger = indexPath.row;
+        [self.smallCollectiionView reloadData];
     }
 }
 //添加定时

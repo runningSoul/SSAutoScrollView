@@ -28,8 +28,8 @@
 //配置文件
 - (void)addUpScrollView
 {
-    AutoScrollView *autoView = [[AutoScrollView alloc]init];
-    autoView.frame =CGRectMake(0,0,kScreenWidth, 200);
+    AutoScrollView *autoView = [[AutoScrollView alloc]initWithFrame:CGRectMake(0,0,kScreenWidth, 200) width:40 height:50];
+    autoView.miniSpalicing = 5;
     autoView.backgroundColor = [UIColor greenColor];
     [self.view addSubview:autoView];
     self.autoView = autoView;

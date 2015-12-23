@@ -14,11 +14,11 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.picImageView = [[UIImageView alloc]init];
-        self.picImageView.frame = CGRectMake(0, 0, 40, self.frame.size.height);
+        self.picImageView.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
         self.backgroundColor = [UIColor yellowColor];
         [self addSubview:self.picImageView];
         UIView *View  =  [[UIView alloc]init];
-        View.frame = CGRectMake(0, 0,50, 50);
+        View.frame = CGRectMake(0, 0,frame.size.width, frame.size.height);
         View.backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.8];
         [self addSubview:View];
         self.maskView  = View;

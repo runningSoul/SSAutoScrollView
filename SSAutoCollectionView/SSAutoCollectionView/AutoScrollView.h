@@ -15,12 +15,17 @@
 
 @interface AutoScrollView : UIView
 
-
+@property (nonatomic,assign)CGFloat smallWidth;
+@property (nonatomic,assign)CGFloat smallHeight;
+/**
+ *  小的view中间的间距
+ */
+@property (nonatomic,assign)CGFloat miniSpalicing;
 @property (nonatomic,strong)UICollectionView *bigCollectiionView;
 
 @property (nonatomic,strong)UICollectionView *smallCollectiionView;
 
 
 @property (nonatomic,strong)NSArray *picArray;
-
+- (instancetype)initWithFrame:(CGRect)frame width:(CGFloat)width height:(CGFloat)height;
 @end
