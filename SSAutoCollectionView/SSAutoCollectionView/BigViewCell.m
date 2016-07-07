@@ -20,6 +20,14 @@
         [self addSubview:self.picImageView];
         
         
+        if (self.itemBlock) {
+            self.itemBlock(1);
+        }
+        
+        
+        if ([self.delege respondsToSelector:@selector(chuanZhi:)]) {
+            [self.delege chuanZhi:@"你好"];
+        }
     }
     return self;
 }
